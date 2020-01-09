@@ -2,7 +2,7 @@ Name: kdebase
 Summary: KDE Core Files
 Epoch: 6
 Version: 4.3.4
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: GPLv2
 Group: User Interface/Desktops
 URL: http://www.kde.org/
@@ -38,6 +38,9 @@ Patch201: kdebase-4.3.4-bz#608007.patch
 
 # bz#729307, not possible to set default konsole size
 Patch202: kdebase-4.3.4-bz#729307.patch
+
+# bz#1305833 - System wide plasma-desktop-appletsrc settings not reflected in user profile
+Patch203: kdebase-plasma-folder-view-add-konsole-to-menu.patch
 
 %ifnarch s390 s390x
 Requires: eject
@@ -118,6 +121,7 @@ Requires: kdepimlibs4-devel
 %patch200 -p0 -b .konsole-kde#177637
 %patch201 -p1 -b .konsole-bz#608007
 %patch202 -p1 -b .konsole-bz#729307
+%patch203 -p1 -b .plasma-folder-view-add-konsole-to-menu
 
 # fix incorrect assumption that we're building in a combined kdebase tree
 sed -i -e 's/EXISTS "${kdebase_SOURCE_DIR}"/0/g' apps/CMakeLists.txt
@@ -235,6 +239,9 @@ fi
 
 
 %changelog
+* Wed Feb 10 2016 Jan Grulich <jgrulich@redhat.com> - 6:4.3:4-7
+- Resolves: bz#1305833 - System wide plasma-desktop-appletsrc settings not reflected in user profile
+
 * Fri Aug 24 2012 Than Ngo <than@redhat.com> - 6:4.3.4-6
 - Resolves: bz#608007, "Show menu bar" is always checked
 - Resolves: bz#729307, not possible to set default konsole size
