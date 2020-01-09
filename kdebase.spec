@@ -2,7 +2,7 @@ Name: kdebase
 Summary: KDE Core Files
 Epoch: 6
 Version: 4.3.4
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: GPLv2
 Group: User Interface/Desktops
 URL: http://www.kde.org/
@@ -32,6 +32,12 @@ Patch100: kdebase-4.3.5.patch
 # Allow 'Open Folder in Tabs' in Konsole to support SSH bookmarks (kde#177637)
 # http://websvn.kde.org/?revision=1033653&view=revision
 Patch200: kdebase-4.3.3-konsole-kde#177637.patch
+
+# bz#608007, "Show menu bar" is always checked
+Patch201: kdebase-4.3.4-bz#608007.patch
+
+# bz#729307, not possible to set default konsole size
+Patch202: kdebase-4.3.4-bz#729307.patch
 
 %ifnarch s390 s390x
 Requires: eject
@@ -110,6 +116,8 @@ Requires: kdepimlibs4-devel
 
 # 4.4 (backported from trunk) upstream patches
 %patch200 -p0 -b .konsole-kde#177637
+%patch201 -p1 -b .konsole-bz#608007
+%patch202 -p1 -b .konsole-bz#729307
 
 # fix incorrect assumption that we're building in a combined kdebase tree
 sed -i -e 's/EXISTS "${kdebase_SOURCE_DIR}"/0/g' apps/CMakeLists.txt
@@ -227,6 +235,10 @@ fi
 
 
 %changelog
+* Fri Aug 24 2012 Than Ngo <than@redhat.com> - 6:4.3.4-6
+- Resolves: bz#608007, "Show menu bar" is always checked
+- Resolves: bz#729307, not possible to set default konsole size
+
 * Mon Jul 18 2011 Than Ngo <than@redhat.com> - 6:4.3.4-5
 - Resolves: bz#631481, Undecodable sequence message starting konsole
 - Resolves: bz#609039, Password & User account becomes non responding
