@@ -2,7 +2,7 @@ Name: kdebase
 Summary: KDE Core Files
 Epoch: 6
 Version: 4.3.4
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPLv2
 Group: User Interface/Desktops
 URL: http://www.kde.org/
@@ -18,6 +18,12 @@ Patch1: kdebase-4.1.70-konsole-session.patch
 
 # make menuitem Home visible
 Patch2: kdebase-4.2.1-home-icon.patch
+
+# bz#631481, fastrack, Undecodable sequence message starting konsole
+Patch3: kdebase-4.3.4-konsole-bz#631481.patch
+
+# bz#609039, fastrack Password & User account becomes non responding
+Patch4: kdebase-4.3.4-bz#609039-chfn-parse.patch
 
 # 4.3 branch
 Patch100: kdebase-4.3.5.patch
@@ -96,6 +102,8 @@ Requires: kdepimlibs4-devel
 %patch0 -p1 -b .nsplugins-paths
 %patch1 -p1 -b .konsole-session
 %patch2 -p1 -b .home-icon
+%patch3 -p1 -b .bz#631481
+%patch4 -p1 -b .bz#609039
 
 # 4.3 branch
 %patch100 -p1 -b .kde435
@@ -219,6 +227,10 @@ fi
 
 
 %changelog
+* Mon Jul 18 2011 Than Ngo <than@redhat.com> - 6:4.3.4-5
+- Resolves: bz#631481, Undecodable sequence message starting konsole
+- Resolves: bz#609039, Password & User account becomes non responding
+
 * Tue Mar 30 2010 Than Ngo <than@redhat.com> - 6:4.3.4-4
 - rebuilt against qt 4.6.2
 
