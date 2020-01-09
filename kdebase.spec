@@ -2,7 +2,7 @@ Name: kdebase
 Summary: KDE Core Files
 Epoch: 6
 Version: 4.3.4
-Release: 7%{?dist}
+Release: 10%{?dist}
 License: GPLv2
 Group: User Interface/Desktops
 URL: http://www.kde.org/
@@ -39,8 +39,23 @@ Patch201: kdebase-4.3.4-bz#608007.patch
 # bz#729307, not possible to set default konsole size
 Patch202: kdebase-4.3.4-bz#729307.patch
 
-# bz#1305833 - System wide plasma-desktop-appletsrc settings not reflected in user profile
-Patch203: kdebase-plasma-folder-view-add-konsole-to-menu.patch
+# bz#895364 - konsole's zmodem file transfer is not working
+Patch203: kdebase-konsole-make-zmodem-file-transfer-to-work.patch
+
+# bz#988464 - KDE konsole minimised on taskbar hangs upon close
+Patch204: kdebase-konsole-do-not-hang-upon-close.patch
+
+# bz#742583 - konsole cuts off descenders of characters
+Patch205: kdebase-4.8.0-konsole-cutted-font.patch
+
+# bz#1230656 - konsole can SEGV when resized
+Patch206: kdebase-4.3.4-konsole-do-not-crash-on-resize.patch
+
+# bz#1279151 - System wide plasma-desktop-appletsrc settings not reflected in user profile
+Patch207: kdebase-plasma-folder-view-add-konsole-to-menu.patch
+
+# bz#1304665 - dolphin crashes while previewing png files
+Patch208: kdebase-dolphin-do-not-crash-phonon-on-png-files.patch
 
 %ifnarch s390 s390x
 Requires: eject
@@ -121,7 +136,12 @@ Requires: kdepimlibs4-devel
 %patch200 -p0 -b .konsole-kde#177637
 %patch201 -p1 -b .konsole-bz#608007
 %patch202 -p1 -b .konsole-bz#729307
-%patch203 -p1 -b .plasma-folder-view-add-konsole-to-menu
+%patch203 -p1 -b .konsole-make-zmodem-file-transfer-to-work
+%patch204 -p1 -b .konsole-do-not-hang-upon-close.patch
+%patch205 -p1 -b .konsole-cutted-font
+%patch206 -p1 -b .konsole-do-not-crash-on-resize
+%patch207 -p1 -b .plasma-folder-view-add-konsole-to-menu
+%patch208 -p1 -b .dolphin-do-not-crash-phonon-on-png-files
 
 # fix incorrect assumption that we're building in a combined kdebase tree
 sed -i -e 's/EXISTS "${kdebase_SOURCE_DIR}"/0/g' apps/CMakeLists.txt
@@ -239,8 +259,19 @@ fi
 
 
 %changelog
-* Wed Feb 10 2016 Jan Grulich <jgrulich@redhat.com> - 6:4.3:4-7
-- Resolves: bz#1305833 - System wide plasma-desktop-appletsrc settings not reflected in user profile
+* Wed Feb 24 2016 Jan Grulich <jgrulich@redhat.com> - 6:4.3.4-10
+- Resolves: bz#1304665 - dolphin crashes while previewing png files
+
+* Wed Dec 02 2015 Jan Grulich <jgrulich@redhat.com> - 6:4.3.4-9
+- Resolves: bz#1279151 - System wide plasma-desktop-appletsrc settings not reflected in user profile
+
+* Fri Nov 27 2015 Jan Grulich <jgrulich@redhat.com> - 6:4.3.4-8
+- Resolves: bz#1069065 - konsole cuts off descenders of characters
+- Resolves: bz#1230656 - konsole can SEGV when resized
+
+* Wed Nov 04 2015 Jan Grulich <jgrulich@redhat.com> - 6:4.3.4-7
+- Resolves: bz#895364 - konsole's zmodem file transfer is not working
+- Resolves: bz#988464 - KDE konsole minimised on taskbar hangs upon close
 
 * Fri Aug 24 2012 Than Ngo <than@redhat.com> - 6:4.3.4-6
 - Resolves: bz#608007, "Show menu bar" is always checked
