@@ -1,0 +1,163 @@
+/** @mainpage KDE Base API Reference
+
+<p><b>
+Overview |
+@ref components |
+@ref development |
+@ref search
+</b></p>
+
+This is the online reference for developing with the KDE base module
+(kdebase).
+
+The KDE base module provides the basic applications needed for KDE,
+using the <a href="http://api.kde.org/4.1-api/kdelibs-apidocs/">KDE
+libraries</a> as a foundation.
+
+The KDE base module is split into three parts:
+- <a href="apps/html/index.html">Applications</a> (apps) consists of
+  the applications a user would expect on a desktop.  This includes
+  a text editor (<a href="http://www.kate-editor.org/">KWrite</a>),
+  a web browser (<a href="http://konqueror.kde.org/">Konqueror</a>)
+  and a file manager (<a href="http://dolphin.kde.org/">Dolphin</a>).
+- <a href="runtime/html/index.html">Runtime</a> provides components
+  that applications can expect to be available when they run, but
+  which they do not need available when compiling.  This includes
+  KIO slaves, the help center and system-wide printer configuration.
+- <a href="workspace/html/index.html">Workspace</a> contains things
+  that are not useful for individual applications running under a
+  difference desktop (such as GNOME), but are necessary for the
+  KDE desktop environment.  This includes a window manager
+  (<a href="workspace/kwin/html/index.html">KWin</a>) and a desktop
+  and panel framework
+  (<a href="workspace/plasma/html/index.html">Plasma</a>).
+
+Most of the applications do not have API documentation.  However, the
+libraries provided by kdebase (such as libkonq and libplamsa) should
+all be documented.
+
+@warning Note that, unlike the libraries provided by kdelibs, those in
+kdebase do not have binary compatibility guarantees.  While code in the
+main KDE modules will be probably be updated by the library developers to
+match API changes, if your third-party application depends on a library
+in kdebase it may not work with future releases of KDE 4.
+
+@authors
+Far too many to list: see the copyright notices on the individual files, or
+the AUTHORS files in individual subdirectories.
+
+@maintainers
+Stephan Kulow \<coolo@kde.org\>
+
+@licenses
+@gpl<br>
+Some libraries: @lgpl<br>
+Some code may have more permissive licenses.
+
+
+*/
+
+/** @page components Components
+
+<p><b>
+@ref index "Overview" |
+Components |
+@ref development |
+@ref search
+</b></p>
+
+Below is a brief summary of the libraries provided by kdebase.  For
+documented applications, see the
+<a href="apps/html/index.html">Applications</a>,
+<a href="runtime/html/index.html">Runtime</a> and
+<a href="workspace/html/index.html">Workspace</a> pages.
+
+Note that most libraries used by a KDE application are provided by
+<a href="http://api.kde.org/4.1-api/kdelibs-apidocs/">kdelibs</a>.
+In addition,
+<a href="http://api.kde.org/4.1-api/kdepimlibs-apidocs/">kdepimlibs</a>
+has some libraries related to personal information management.
+
+@warning Using these libraries will introduce a build-time and run-time
+dependency on kdebase (or on kdebase-apps or kdebase-workspace if they
+are packaged separately).  Unless you are, for example, writing Plasma
+applets or data engines, you probably do not want to use these libraries.
+
+You can, of course, use your own copy of these libraries.  However, that
+introduces additional problems, such as not automatically receiving
+bugfixes when the user updates their kdebase package.
+
+<dl>
+    <dt>libplasma</dt>
+    <dd>The Plasma framework, providing a QGraphicsView based
+        interface.<br>
+        [ <a href="workspace/libs/plasma/html/index.html">Documentation</a> |
+          <a href="workspace/libs/plasma/html/classes.html">Classes</a> ]</dd>
+
+    <dt>libkonq</dt>
+    <dd>Browser and file-management library building on KIO.<br>
+        [ <a href="apps/lib/konq/html/index.html">Documentation</a> |
+          <a href="apps/lib/konq/html/classes.html">Classes</a> ]</dd>
+
+    <dt>libkwin</dt>
+    <dd>Window-management library.<br>
+        [ <a href="workspace/kwin/lib/html/index.html">Documentation</a> |
+          <a href="workspace/kwin/lib/html/classes.html">Classes</a> ]</dd>
+</dl>
+
+*/
+
+/** @page development Development
+
+<p><b>
+@ref index "Overview" |
+@ref components |
+Development |
+@ref search
+</b></p>
+
+To follow or get involved with the development of the KDE base module,
+join the
+<a href="https://mail.kde.org/mailman/listinfo/kde-core-devel">kde-core-devel
+mailing list</a>.
+
+Instructions for building a development version of KDE can be found in the
+<a href="http://techbase.kde.org/Getting_Started">getting started</a> section
+of the <a href="http://techbase.kde.org">KDE Techbase</a>.
+
+Individual components may also have their
+<a href="http://www.kde.org/mailinglists/">own mailing lists</a>.  See their
+individual pages for more information.
+
+*/
+
+/** @page search Search
+
+<p><b>
+@ref index "Overview" |
+@ref components |
+@ref development |
+Search
+</b></p>
+
+You can search for any documented class in the KDE base module here.
+
+Note: only enter the class name, without any namespace qualifiers.
+
+@htmlonly
+<form action="http://api.kde.org/classmapper.php" method="get">
+<input type="text" name="class" value="[classname]" style="width:100%;" onClick="this.value='';"/>
+<input type="submit" name="go" value="Go" />
+<input type=hidden name="module" value="kdebase">
+<input type=hidden name="version" value="4.1">
+</form>
+@endhtmlonly
+
+If you want to search for any sort of identifier in kdebase (and other code
+in the KDE SVN repository), you can do so using the
+<a href="http://lxr.kde.org">KDE Source Cross-Reference</a> tool.
+
+*/
+// DOXYGEN_NAME=kdebase
+// DOXYGEN_ENABLE=YES
+// vim:ts=4:sw=4:expandtab:filetype=doxygen

@@ -1,0 +1,248 @@
+In this file:
+
+* About kdebase
+* Thank you
+* Common Mistakes
+* Configuring
+* Debugging
+* Upgrading
+* Removal/Uninstallation
+* More Info
+
+
+About kdebase
+-------------
+kdebase is the second mandatory package (besides kdelibs) for the K Desktop
+Environment. Here we have various applications and infrastructure files and
+libraries. Here is an overview of the directories:
+
+== WARNING THIS OVERVIEW IS OLD; things have been separated into submodules nowadays ==
+
+* doc
+    XML formatted documentation files for the apps
+
+* drkonqi
+    If ever an app crashes (heaven forbid!) then Dr.Konqi will be so kind
+    and make a stack trace. This is a great help for the developers to fix
+    the bug.
+
+* kappfinder
+    Searches for non-KDE applications, e.g. Acrobat Reader (tm) and installs
+    those apps under the K start button.
+
+* kcheckpass
+    Small program to enter and check passwords, to be used by other
+    programs.
+
+* kcontrol
+    The KDE Control Center allows you to tweak the KDE settings.
+
+* kdebugdialog
+    Allows you to specify which debug messages you want to see.
+
+* kdesu
+    A graphical front end to "su".
+
+* kdialog
+    Allows to display menu boxes from shell scripts.
+
+* kdm
+    Replacement for XDM, for those people that like graphical logins.
+
+* kfind
+    File find utility (standalone and in Konqueror's file manager).
+
+* khelpcenter
+    Used to to read all great documentation about KDE, unix man pages,
+    info pages etc.
+
+* khotkeys
+    Intercepts keys and can call applications.
+
+* kioslave
+    Infrastructure that helps make every application internet enabled
+    e.g. to directly save a file to ftp://place.org/dir/file.txt
+
+* klipper
+    Taskbar applet that enhances and extenses the X clipboard.
+
+* kmenuedit
+    Edit for the menu below the K start button.
+
+* konqueror
+    The file manager and web browser you get easily used to.
+
+* konsole
+    A shell program similar to xterm.
+
+* kreadconfig
+    A tool for shell scripts to get info from KDE's config files.
+
+* kscreensaver
+    The KDE screensaver environment and some basic screensavers. More
+    of them are in the kdeartwork package.
+
+* ksmserver
+    The KDE session manager (saves program status on login, restarts
+    those program at the next login).
+
+* kdepasswd
+    A KDE frontend for passwd. Also contains the "Password & User Information" KCM.
+
+* ksplashml
+    The screen displayed while KDE starts.
+
+* kstart
+    Launches applications with special window properties such as iconified,
+    etc.
+
+* ksysguard
+    Task manager and system monitor, can work with remote systems.
+
+* ksystraycmd
+    Allows to run any application in the system tray.
+
+* ktip
+    Gives you tips how to use KDE.
+
+* kwin
+    The KDE window manager (moves, resizes and decorates windows).
+
+* kxkb
+    A keyboard map tool.
+
+* l10n
+    l-10letters-n: localization. Mostly country flags.
+
+* libkonq
+    Some libraries needed by Konqueror.
+
+* nsplugins
+    Together with OSF/Motif or Lesstif allows you to use Netscape (tm)
+    plugins in Konqueror.
+
+* pics
+    Various icons and wallpapers.
+
+
+Thanks!
+-------
+Thank you Steven M. Scotten and Kuno Raffi (weave) for creating artwork
+specifically for the K Desktop Environment.  Your efforts are much
+appreciated.
+
+Mr. Scotten has created: blue_angle_swirl, bluecheck, bluegreencrisscross,
+bluegreensilver, candystripe_chainlink, charcoal_sunset, fadedpaint,
+garden_lattice, ghost_lightning, glassywarpcheck, gold_crinkle, greenish,
+heavens_hex, latte, lime_vibration, liquid_canvas, northbeach,
+orange_stacks, purple_swirl, string_theory, sunday_brunch,
+toothofthehoundthatbitcha, vegetative_fog, wavetron, woodcheck
+
+
+Common Mistakes
+---------------
+IMPORTANT: most applications need KDEDIRS as the directory where KDE is
+installed.  Please set this in your login file. KDEDIR is deprecated starting
+with KDE 4. Instead use KDEDIRS, which can also hold a list of directories.
+
+If XPM support wasn't configured, it may be that configure has no idea where
+your XPM libraries are.  If so, set XPM_INCLUDE and XPM_LDFLAGS to the paths
+where configure should look for XPM.  But if you haven't installed XPM or it
+didn't come with your system, that's no problem.  You will only miss a few
+screensavers.  The same thing applies with OPENGL support.  Here you have to
+set GL_INCLUDE and GL_LDFLAGS.
+
+If configure claims Qt cannot be found, have a look at
+ftp://ftp.trolltech.com and download the latest Qt 4.x.x release, at least Qt 4.4.0.
+
+Be advised, if you're using FreeBSD, then please do not use the Qt port that
+comes along with it.
+
+Configuring
+-----------
+
+KDE 4 is built using CMake (http://www.cmake.org), version 2.4.5 is the minimum
+required version. This means there is no configure-script anymore, but you
+need to run cmake.
+Before building kdebase, you need to build and install kdepimlibs, this is 
+new compared to KDE < 4.
+Most of the options which were supported by the "old" configure script
+are already also supported with the new buildsystem. To adjust these options,
+use ccmake, there you can see them all. They have been slightly renamed
+compared to the configure-options:
+
+These are the installation directories, by default they are all
+located beneath /usr/local, but you can adjust each of them individually.
+
+ CONFIG_INSTALL_DIR       - the config file install dir
+ DATA_INSTALL_DIR         - the parent directory where applications can install their data
+ HTML_INSTALL_DIR         - the HTML install dir for documentation
+ ICON_INSTALL_DIR         - the icon install dir (default prefix/share/icons/)
+ INFO_INSTALL_DIR         - the kde info install dir (default prefix/info)
+ KCFG_INSTALL_DIR         - the install dir for kconfig files
+ LIB_INSTALL_DIR          - the subdirectory relative to the install prefix where libraries will b
+ LOCALE_INSTALL_DIR       - the install dir for translations
+ MAN_INSTALL_DIR          - the kde man page install dir (default prefix/man/)
+ MIME_INSTALL_DIR         - the install dir for the mimetype desktop files
+ PLUGIN_INSTALL_DIR       - the subdirectory relative to the install prefix where plugins will be
+ SERVICES_INSTALL_DIR     - the install dir for service (desktop, protocol, ...) files
+ SERVICETYPES_INSTALL_DIR - the install dir for servicestypes desktop files
+ SOUND_INSTALL_DIR        - the install dir for sound files
+ TEMPLATES_INSTALL_DIR    - the install dir for templates (Create new file...)
+ WALLPAPER_INSTALL_DIR    - the install dir for wallpapers
+ KCONF_UPDATE_INSTALL_DIR - the kconf_update install dir
+ XDG_APPS_INSTALL_DIR     - the XDG apps dir
+ XDG_DIRECTORY_INSTALL_DIR- the XDG directory
+ SYSCONF_INSTALL_DIR      - The kde sysconfig install dir
+ AUTOSTART_INSTALL_DIR    - The install dir for autostart files 
+
+CMAKE_SKIP_RPATH: set it to TRUE to disable RPATH completely
+KDE4_USE_ALWAYS_FULL_RPATH: set it to TRUE to use the full RPATH everywhere
+
+Use ccmake to see all available settings.
+
+Debugging
+---------
+You can use --enable-debug with the configure script, if you want to have
+debug code in your KDE apps and libs. 
+To get another build of KDE, you have to adjust the CMake variable CMAKE_BUILD_TYPE.
+The following build types are supported:
+
+"RELWITHDEBINFO" - optimized and debug info
+"RELEASE"        - optimized
+"DEBUG"          - optimizied, debug info, some optimizations disabled
+"DEBUGFULL"      - more debug info, no optimizations
+"PROFILE"        - full debug, coverage and profile info
+
+If you experience problems and want to
+report problems to the KDE Bugs database, it is recommended to recompile
+with this switch enabled to make the backtraces more verbose (and thus
+giving the developer more information about the cause of the bug).
+
+
+Removal/Uninstallation
+----------------------
+You can use 'make uninstall' if you want to remove the kde from the dirs.
+This feature has not been tested completely, and is depreciated. On a system
+where KDEDIRS is specific to KDE (i.e. not /usr) and contains only a single
+directory, rm -rf $KDEDIRS does it as well.
+
+
+More Info
+---------
+If your system supports PAM (Plugable Authentication Modules), please see
+the README.pam file in the workspace directory for more information about
+using KDE with PAM.
+
+Have a look at the individual subdirectories, if you would like to find out
+more about a specific application included in kdebase.
+
+More FAQs on http://www.kde.org/info/faq.html
+
+If you have problems compiling and installing this package, please check the
+kde-devel@kde.org mailing list archive (see http://lists.kde.org) to see if
+somebody had a similar problem already. If not, try posting a message to
+the list with detailed information about the compile problem.
+
+General KDE discussions should go to the KDE mailing list (kde@kde.org).
+

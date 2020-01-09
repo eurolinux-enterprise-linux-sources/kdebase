@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
+<kcfg>
+    <kcfgfile name="dolphinrc"/>
+    <group name="InformationPanel">
+        <entry name="showPreview" type="Bool">
+            <label>Show preview</label>
+            <default>true</default>
+        </entry>
+        <entry name="showRating" type="Bool">
+            <label>Show rating</label>
+            <default>true</default>
+        </entry>
+        <entry name="showComment" type="Bool">
+            <label>Show comment</label>
+            <default>true</default>
+        </entry>
+        <entry name="showTags" type="Bool">
+            <label>Show tags</label>
+            <default>true</default>
+        </entry>
+    </group>
+</kcfg>
